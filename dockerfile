@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3004
+EXPOSE 5000
 
 CMD [ "node", "orderServer.js" ]

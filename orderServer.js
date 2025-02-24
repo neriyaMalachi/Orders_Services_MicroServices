@@ -20,7 +20,7 @@ export const db = new sqlite3.Database("./orders.db", (err) => {
                 status TEXT DEFAULT 'pending'
             )
         `);
-    console.log("Database connected and table ready");
+    console.log("Database connected SQL ");
   }
 });
 
