@@ -1,12 +1,18 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const ordercontroller = require('../controllers/orderController');
+import {
+  createOrder,
+  deleteById,
+  getAllOrders,
+  getOrderbyId,
+  updateOrder,
+} from "../controllers/orderController.js";
 
 // נתיבי CRUD למשתמשים
-router.post('/orders', ordercontroller.createOrder);
-router.get('/orders', ordercontroller.getAllOrders);
-router.get('/orders/:id', ordercontroller.getOrderbyId);
-router.put('/orders/:id', ordercontroller.updateOrder);
-router.delete('/orders/:id', ordercontroller.deleteById);
+router.post("/orders", createOrder);
+router.get("/orders", getAllOrders);
+router.get("/orders/:id", getOrderbyId);
+router.put("/orders/:id", updateOrder);
+router.delete("/orders/:id", deleteById);
 
-module.exports = router;
+export default router;

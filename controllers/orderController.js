@@ -1,7 +1,7 @@
-const db = require('../orderServer');
+import {db} from '../orderServer.js'
 
 // Create Order
-exports.createOrder = (req, res) => {
+export const createOrder = (req, res) => {
     const { customer_name, item, quantity } = req.body;
     db.run(`INSERT INTO orders (customer_name, item, quantity) VALUES (?, ?, ?)`,
         [customer_name, item, quantity], function (err) {
@@ -11,7 +11,7 @@ exports.createOrder = (req, res) => {
 };
 
 // Read All Orders
-exports.getAllOrders = (req, res) => {
+export const getAllOrders = (req, res) => {
     db.all(`SELECT * FROM orders`, [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json(rows);
@@ -19,7 +19,7 @@ exports.getAllOrders = (req, res) => {
 };
 
 // Read Single Order
-exports.getOrderbyId = (req, res) => {
+export const getOrderbyId = (req, res) => {
     db.get(`SELECT * FROM orders WHERE id = ?`, [req.params.id], (err, row) => {
         if (err) return res.status(500).json({ error: err.message });
         row ? res.json(row) : res.status(404).json({ message: 'Order not found' });
@@ -27,7 +27,7 @@ exports.getOrderbyId = (req, res) => {
 };
 
 // Update Order
-exports.updateOrder =(req, res) => {
+export const updateOrder =(req, res) => {
     const { customer_name, item, quantity, status } = req.body;
     db.run(`UPDATE orders SET customer_name = ?, item = ?, quantity = ?, status = ? WHERE id = ?`,
         [customer_name, item, quantity, status, req.params.id], function (err) {
@@ -37,7 +37,7 @@ exports.updateOrder =(req, res) => {
 };
 
 // Delete Order
-exports.deleteById = (req, res) => {
+export const deleteById = (req, res) => {
     db.run(`DELETE FROM orders WHERE id = ?`, [req.params.id], function (err) {
         if (err) return res.status(500).json({ error: err.message });
         this.changes ? res.json({ message: 'Order deleted' }) : res.status(404).json({ message: 'Order not found' });
